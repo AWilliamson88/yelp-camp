@@ -1,0 +1,85 @@
+<% layout('layouts/Boilerplate') %>
+
+<div class="row">
+  <h1 class="text-center">Edit <%= campground.title %></h1>
+  <div class="col-6 offset-3">
+    <form
+      action="/campgrounds/<%= campground._id %>/?_method=PUT"
+      method="POST"
+      novalidate
+      class="needs-validation"
+    >
+      <div class="mb-3">
+        <label for="titel" class="form-label">Title:</label>
+        <input
+          type="text"
+          name="campground[title]"
+          id="title"
+          value="<%= campground.title %>"
+          required
+          class="form-control"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="image" class="form-label">Image:</label>
+        <input
+          type="text"
+          name="campground[image]"
+          id="image"
+          class="form-control"
+          value="<%= campground.image %>"
+        />
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+      <div class="mb-3">
+        <label for="location" class="form-label">Location:</label>
+        <input
+          type="text"
+          name="campground[location]"
+          id="location"
+          value="<%= campground.location %>"
+          required
+          class="form-control"
+        />
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description:</label>
+        <textarea
+          name="campground[description]"
+          id="description"
+          class="form-control"
+        >
+<%= campground.description %>
+      </textarea
+        >
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="price" class="form-label">Price:</label>
+        <div class="input-group">
+          <span class="input-group-text">$</span>
+          <input
+            type="number"
+            id="price"
+            name="campground[price]"
+            class="form-control"
+            value="<%= campground.price %>"
+            aria-label="price"
+            aria-describedby="price-label"
+            min="0"
+            step="0.01"
+            required
+          />
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <button type="submit" class="btn btn-success">Update</button>
+      </div>
+    </form>
+    <a href="/campgrounds/<%= campground._id %>">Cancel</a>
+    <a href="/campgrounds">Back to all</a>
+  </div>
+</div>
