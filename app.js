@@ -1,3 +1,8 @@
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv').config();
+}
+
+
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
@@ -80,7 +85,6 @@ app.use((req, res, next) => {
 
     // All pages will have access to currentUser.
     res.locals.currentUser = req.user;
-    console.log(req.user);
 
     // Anything in req.flash under success.
     // will be available in res.locals.success

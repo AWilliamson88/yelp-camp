@@ -9,11 +9,9 @@
 <div class="row">
   <div class="col-8">
     <div class="card">
-      <img
-        src="<%= campground.image %>"
-        class="card-img-top"
-        alt="campground"
-      />
+      <% for(let image of campground.images) { %>
+      <img src="<%= image.url %>" class="card-img-top" alt="campground" />
+      <% } %>
       <div class="card-body">
         <h5 class="card-title"><%= campground.title %></h5>
         <p class="card-text"><%= campground.description %></p>
