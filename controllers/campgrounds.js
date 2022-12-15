@@ -16,7 +16,7 @@ module.exports.createCampgrounds = async (req, res, next) => {
     newCampground.author = req.user._id;
     // save the new campground into db
     await newCampground.save();
-    console.log(newCampground);
+    console.log(newCampground)
     req.flash('success', 'Successfully made a new campground.');
     res.redirect(`/campgrounds/${newCampground._id}`);
 }
@@ -60,8 +60,11 @@ module.exports.updateCampgrounds = async (req, res) => {
         req.flash('error', 'Campground not found');
         res.redirect('/campgrounds');
     }
-    const update =
+    const updatedCampgrounds =
         await Campground.findByIdAndUpdate(id, { ...req.body.campground }, { runValidators: true, new: true });
+    const images = req.files.map(f => ({ url: f.path, filename: f.filename }));
+    updatedCampgrounds.images.push(...images);
+    await updatedCampgrounds.save();
     req.flash('success', 'Successfully updated the campground');
     res.redirect(`/campgrounds/${campground._id}`);
 }
