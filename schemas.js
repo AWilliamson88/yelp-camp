@@ -8,7 +8,8 @@ module.exports.campgroundSchema = Joi.object({
         // image: Joi.string().required(),
         description: Joi.string().required(),
         price: Joi.number().min(0).precision(2).required()
-    }).required()
+    }).required(),
+    deleteImages: Joi.array()
 });
 
 // Review validation schema
