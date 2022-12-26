@@ -6,9 +6,16 @@
   href="/stylesheets/starability-slot.min.css"
 />
 
+<script>
+  const token = "<%= process.env.MAPBOX_TOKEN %>";
+  const campground = <%- JSON.stringify(campground) %>;
+</script>
+
 <div class="row">
   <div class="col-8">
     <div class="card">
+      <!-- Map -->
+      <div id="map" style="width: 400px; height: 300px"></div>
       <!-- Carousel -->
       <div
         id="campgroundCarousel"
@@ -175,3 +182,5 @@
     <% } %>
   </div>
 </div>
+
+<script src="/javascripts/showPageMap.js"></script>
