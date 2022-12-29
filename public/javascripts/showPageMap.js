@@ -7,6 +7,8 @@ const map = new mapboxgl.Map({
     zoom: 8, // starting zoom
 });
 
+map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
+
 // Create a default Marker, colored black, rotated 45 degrees.
 // const marker2 = new mapboxgl.Marker({ color: 'black', rotation: 45 })
 new mapboxgl.Marker({ color: 'black', rotation: 45 })
