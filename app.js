@@ -1,9 +1,8 @@
-let dbURL;
 if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
-    dbURL = `mongodb://localhost:27017/my-yelp`;
+
 } else {
-    dbURL = process.env.ATLAS_CONNECTION_STRING;
+
 }
 
 const express = require('express');
@@ -27,6 +26,8 @@ const reviewRoutes = require('./routes/reviews');
 const userRoutes = require('./routes/users');
 
 const port = 3000;
+const dbURL = process.env.ATLAS_CONNECTION_STRING || `mongodb://localhost:27017/my-yelp`;
+const secret = process.env.SECRET || 'bad secret';
 
 mongoose.connect(dbURL, {
     useNewUrlParser: true,
@@ -58,7 +59,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const store = MongoStore.create({
     mongoUrl: dbURL,
-    secret: 'bad secret',
+    secret,
     touchAfter: 24 * 3600,
 });
 
@@ -70,7 +71,7 @@ store.on('error', function (e) {
 const sessionConfig = {
     store,
     name: 'MYCS',
-    secret: 'bad secret',
+    secret,
     resave: false,
     saveUninitialized: true,
     cookie: {
