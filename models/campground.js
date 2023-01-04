@@ -45,7 +45,15 @@ CampgroundSchema.virtual('properties.popUpHTML').get(function () {
     return `<a href="/campgrounds/${this._id}"><h5>${this.title}</h5></a>
         <p>${this.description.substring(0, 50)}...</p>
         <strong>$${this.price}/Night</strong>`;
-})
+});
+
+CampgroundSchema.virtual('properties.avgRating').get(function () {
+    let total = 0;
+    for (let review of this.reviews) {
+        total += review.rating;
+    }
+    return (total / this.reviews.length).toFixed(1);
+});
 
 CampgroundSchema.post('findOneAndDelete', async function (doc) {
     if (doc) {
